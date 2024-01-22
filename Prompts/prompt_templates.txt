@@ -1,0 +1,59 @@
+CounterExample = '''
+Here are two SQL queries, Q1 and Q2.
+Your task is to quietly think and determine if the following two SQL queries (Q1 and Q2) are semantic equivalent based on the DATABASE SCHEMA.
+Return EQUIVALENT or NOT EQUIVALENT in Answer. If the two queries are not equivalent, then please provide a counter example.
+
+Note: Two SQL queries are semantic equivalent if and only if they return the same output for all possible table contents.
+
+Q1:{Q1}
+
+Q2:{Q2}
+
+The DATABASE SCHEMA: {schema}
+
+Answer:
+'''
+
+
+MiniatureAndMull = """Here are two SQL queries, Q1 and Q2 following DATABASE SCHEMA.
+Your task is to think and determine if the following two SQL queries (Q1 and Q2) are equivalent or not equivalent.
+
+Q1:```{Q1}```
+
+Q2:```{Q2}```
+
+
+Note: Two SQL queries are semantically equivalent if and only if they yield identical results for all possible databases.
+
+1. Try one example database and observe the output of Q1 and Q2.
+
+2. If the outputs are identical, can you modify the example database such that the outputs of Q1 and Q2 are not identical?
+
+If such a counter example exists, return THE ANSWER IS NOT EQUIVALENT in the answer.
+Otherwise, return THE ANSWER IS EQUIVALENT in the answer.
+
+DATABASE SCHEMA: {schema}
+
+Answer:"""
+
+
+ExplainAndCompare = """Here are two SQL queries, Q1 and Q2 following DATABASE SCHEMA.
+Your task is to think and determine if the following two SQL queries (Q1 and Q2) are equivalent or not equivalent.
+
+Q1:```{Q1}```
+
+Q2:```{Q2}```
+
+First, explain SQL query Q1 and then explain SQL query Q2. 
+
+Are there SIGNIFICANT logic differences between Q1 and Q2?
+
+If the differences are logically SIGNIFICANT, then the Q1 and Q2 are not equivalent.
+Otherwise, Q1 and Q2 are equivalent.
+
+Output either THE ANSWER IS EQUIVALENT or THE ANSWER IS NOT EQUIVALENT at the end. (NEVER BOTH)
+
+The DATABASE SCHEMA: {schema}
+
+Answer:"""
+
