@@ -16,12 +16,11 @@ Answer:
 
 
 MiniatureAndMull = """Here are two SQL queries, Q1 and Q2 following DATABASE SCHEMA.
-Your task is to think and determine if the following two SQL queries (Q1 and Q2) are equivalent or not equivalent.
+Your task is to think and determine if the following two SQL queries (Q1 and Q2) are semantically equivalent or not semantically equivalent.
 
 Q1:```{Q1}```
 
 Q2:```{Q2}```
-
 
 Note: Two SQL queries are semantically equivalent if and only if they yield identical results for all possible databases.
 
@@ -29,8 +28,8 @@ Note: Two SQL queries are semantically equivalent if and only if they yield iden
 
 2. If the outputs are identical, can you modify the example database such that the outputs of Q1 and Q2 are not identical?
 
-If such a counter example exists, return THE ANSWER IS NOT EQUIVALENT in the answer.
-Otherwise, return THE ANSWER IS EQUIVALENT in the answer.
+3. If a counter example exists, return THE ANSWER IS NOT EQUIVALENT after step 2.
+   Otherwise, return THE ANSWER IS EQUIVALENT after step 2.
 
 DATABASE SCHEMA: {schema}
 
