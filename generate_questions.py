@@ -35,10 +35,11 @@ if __name__ == '__main__':
         examples = relax_static_prefix
     assert(args.fewshot <= 5 )
     assert prompt_template != None, print(args.prompt_template, type(prompt_template))
-    example_list = examples.split('/* Given the following two SQL queries Q1 and Q2 */')
+    assert '/* Given the following two SQL examples */' in examples
+    example_list = examples.split('/* Given the following two SQL examples */')
     examples = ''
     if args.fewshot > 0:
-        examples = '/* Given the following two SQL queries Q1 and Q2 */'.join(example_list[:args.fewshot+1]) + '\n\n'
+        examples = '/* Given the following two SQL examples */'.join(example_list[:args.fewshot+1]) + '\n\n'
 
 
     os.makedirs(args.output_dir, exist_ok=True)

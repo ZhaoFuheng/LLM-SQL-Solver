@@ -18,6 +18,7 @@ Q2:{Q2}
 2. If the outputs are identical, can you modify the example database such that the outputs of Q1 and Q2 are not identical?
 3. After evaluating whether there exists a database such Q1 and Q2 output different tables, write your answer using format decision = "equivalent" or decision = "inequivalent".
 */
+1.
 '''
 
 
@@ -26,44 +27,43 @@ Q1:{Q1}
 Q2:{Q2}
 /* And the following database schema: */
 {schema}
-/* Let's think step by step. Are Q1 and Q2 pragmatic equivalent?
+/* Let's think step by step. Are Q1 and Q2 pragmatic equivalent (with same intention)?
 1. Explain Q1 and Q2.
-2. Do Q1 and Q2 have the same intention or share aligned logic? Write your answer using format decision = "equivalent" or decision = "inequivalent". Let's think step by step. 
+2. Do Q1 and Q2 share aligned logic or Q1 and Q2 have significant differences? Write your answer using format decision = "equivalent" or decision = "inequivalent". Let's think step by step. 
 */
+1.
 '''
 
 
 semantic_static_prefix = '''/* some examples are provided */
-/* Given the following two SQL queries Q1 and Q2 */
-Q1: select distinct table_1.x from r1 table_1, r2 table_2 where table_1.id = table_2.id and table_1.x = 1
-Q2: select distinct table_1.x from r1 table_1, r1 table_2, r2 table_3 where table_1.x = table_2.x and table_1.id = table_3.id and table_1.x = 1
-/* Are Q1 and Q2 sematically equivalent? */
+/* Given the following two SQL examples */
+example sql1: select distinct T1.id from customer AS T1, customer AS T2 where T1.id = T2.id and T1.order_id = 1
+example sql2: select distinct T1.id from customer AS T1, customer AS T2, customer AS T3 where T1.id = T2.id and T2.id = T3.id and T1.order_id = 1
+/* Are they sematically equivalent? */
 decision = "equivalent"
 
-/* Given the following two SQL queries Q1 and Q2 */
-Q1: select table_1.x from r1 table_1
-Q2: select table_1.id, table_1.x from r1 table_1
-/* Are Q1 and Q2 sematically equivalent? */
+/* Given the following two SQL examples */
+example sql1: select T1.avg_sale from singer AS T1
+example sql2: select AVG(T1.sale) from singer AS T1
+/* Are they sematically equivalent? */
 decision = "inequivalent"
 
-/* Given the following two SQL queries Q1 and Q2 */
-Q1: SELECT x.a as a FROM x x, y y WHERE x.k = y.k
-Q2: SELECT x1.a as a
-      	  FROM (SELECT x.a as a, x.k as k FROM x x) x1, y y
-	  WHERE x1.k = y.k
-/* Are Q1 and Q2 sematically equivalent? */
+/* Given the following two SQL examples */
+example sql1: SELECT * FROM emp WHERE sal = 3 AND comm = sal + 5
+example sql2: SELECT * FROM emp WHERE sal = 3 AND comm = 8
+/* Are they sematically equivalent? */
 decision = "equivalent"
 
-/* Given the following two SQL queries Q1 and Q2 */
-Q1: select r1.x from r1 table_1 where r1.table_id = 1
-Q2: select r1.x from r1 table_1 where r1.table_id = 10
-/* Are Q1 and Q2 sematically equivalent? */
+/* Given the following two SQL examples */
+example sql1: select dept.name from dept where dept.id = 1
+example sql2: select dept.name from dept where dept.id = 10
+/* Are they sematically equivalent? */
 decision = "inequivalent"
 
-/* Given the following two SQL queries Q1 and Q2 */
-Q1: select * from r x where x.id = 1
-Q2: select * from (select * from r x where x.id = 1) y where y.id = 1
-/* Are Q1 and Q2 sematically equivalent? */
+/* Given the following two SQL examples */
+example sql1: SELECT dept.deptno FROM dept AS dept GROUP BY dept.deptno, dept.deptno
+example sql2: SELECT dept.deptno FROM dept AS dept GROUP BY dept.deptno
+/* Are they sematically equivalent? */
 decision = "equivalent"
 '''
 
@@ -74,7 +74,7 @@ example sql1: SELECT DISTINCT releaseType FROM torrents where groupName != 'Chri
 example sql2: SELECT releaseType FROM torrents where groupName <> 'christmas'
 /* Do they have the same intention or share aligned logic? */
 The only differeences are distinct and Christmas v.s. christmas.
-Because distinct and case sensitivity do not change the logic, they convey the same meaning.
+Because distinct and case sensitivity do not change the logic, they have no significant difference and they convey the same meaning.
 decision = "equivalent"
 
 /* Given the following two SQL examples */
